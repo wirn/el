@@ -5,10 +5,10 @@ import { PriceInterval } from '../models/priceInterval.model';
 import { Region } from '../models/regions.enum';
 
 @Component({
-    selector: 'app-el-list',
-    imports: [CommonModule],
-    templateUrl: './el-list.component.html',
-    styleUrl: './el-list.component.scss'
+  selector: 'app-el-list',
+  imports: [CommonModule],
+  templateUrl: './el-list.component.html',
+  styleUrl: './el-list.component.scss',
 })
 export class ElListComponent implements OnInit {
   //Capacitor
@@ -48,5 +48,11 @@ export class ElListComponent implements OnInit {
     } else {
       return '';
     }
+  }
+
+  getTimeClass(startTime: Date): string {
+    return new Date(startTime).getHours() === new Date().getHours()
+      ? 'interval-now'
+      : '';
   }
 }

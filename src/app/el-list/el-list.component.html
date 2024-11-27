@@ -3,7 +3,11 @@
 <div class="wrapper">
   <div>
     <h3>{{ today | date : "dd/MM" }}</h3>
-    <div *ngFor="let pi of priceIntervalTodayList">
+    <div
+      *ngFor="let pi of priceIntervalTodayList"
+      class="interval"
+      [ngClass]="getTimeClass(pi.time_start)"
+    >
       <span style="margin-right: 0.75rem">
         {{ pi.time_start | date : "HH" }}
         -
