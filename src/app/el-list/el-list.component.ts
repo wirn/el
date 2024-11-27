@@ -5,11 +5,10 @@ import { PriceInterval } from '../models/priceInterval.model';
 import { Region } from '../models/regions.enum';
 
 @Component({
-  selector: 'app-el-list',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './el-list.component.html',
-  styleUrl: './el-list.component.scss',
+    selector: 'app-el-list',
+    imports: [CommonModule],
+    templateUrl: './el-list.component.html',
+    styleUrl: './el-list.component.scss'
 })
 export class ElListComponent implements OnInit {
   //Capacitor
