@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ElListComponent } from './el-list.component';
+import { StartComponent } from './start.component';
 
-describe('ElListComponent', () => {
-  let component: ElListComponent;
-  let fixture: ComponentFixture<ElListComponent>;
+describe('StartComponent', () => {
+  let component: StartComponent;
+  let fixture: ComponentFixture<StartComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ElListComponent]
+      imports: [StartComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ElListComponent);
+    fixture = TestBed.createComponent(StartComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -16,10 +16,10 @@ export class ElectricityPriceService {
     date: Date,
     region: Region
   ): Observable<PriceInterval[]> {
-    const formatedDate = `${date.getFullYear()}/${
-      date.getMonth() + 1
-    }-${date.getDate()}`;
-    const url = `${this.apiUrlBase}/${formatedDate}_${region}.json`;
+    const formattedDate = `${date.getFullYear()}/${(date.getMonth() + 1)
+      .toString()
+      .padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+    const url = `${this.apiUrlBase}/${formattedDate}_${region}.json`;
     return this.http.get<PriceInterval[]>(url);
   }
 }

@@ -25,6 +25,7 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+
             "assets": [
               {
                 "glob": "**/*",
@@ -32,8 +33,13 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles/styles"
+              ]
+            },
             "scripts": []
           },
           "configurations": {
@@ -91,7 +97,7 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles/styles.scss"
             ],
             "scripts": []
           }

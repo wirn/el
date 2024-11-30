@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { ElListComponent } from './el-list/el-list.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [ElListComponent],
+  imports: [RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

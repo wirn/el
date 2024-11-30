@@ -1,5 +1,3 @@
-<!-- <pre>{{ today | date : "HH mm" }}</pre> -->
-
 <div class="wrapper">
   <div>
     <h3>{{ today | date : "dd/MM" }}</h3>
@@ -22,7 +20,7 @@
 
   <div>
     <h3>{{ tomorrow | date : "dd/MM" }}</h3>
-    <div *ngFor="let pi of priceIntervalTomorrowList">
+    <div *ngFor="let pi of priceIntervalTomorrowList" class="interval">
       <span style="margin-right: 0.75rem">
         {{ pi.time_start | date : "HH" }}
         -

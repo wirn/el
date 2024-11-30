@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { ElectricityPriceService } from '../services/electricity-price.service';
+import { Component } from '@angular/core';
+import { PriceInterval } from '../../models/priceInterval.model';
+import { ElectricityPriceService } from '../../services/electricity-price.service';
+import { Region } from '../../models/regions.enum';
 import { CommonModule } from '@angular/common';
-import { PriceInterval } from '../models/priceInterval.model';
-import { Region } from '../models/regions.enum';
 
 @Component({
-  selector: 'app-el-list',
+  selector: 'app-start',
   imports: [CommonModule],
-  templateUrl: './el-list.component.html',
-  styleUrl: './el-list.component.scss',
+  templateUrl: './start.component.html',
+  styleUrl: './start.component.scss',
 })
-export class ElListComponent implements OnInit {
+export class StartComponent {
   //Capacitor
   public priceIntervalTodayList: PriceInterval[] = [];
   public priceIntervalTomorrowList: PriceInterval[] = [];
