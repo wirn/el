@@ -2,6 +2,11 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
+  > div {
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+    text-align: center;
+  }
 }
 
 .price {
@@ -17,7 +22,10 @@
 }
 
 .interval {
+  padding: 0.2rem;
   &-now {
     font-weight: bold;
+    border: 1px solid rgb(165, 165, 165);
+    border-radius: 0.5rem;
   }
 }

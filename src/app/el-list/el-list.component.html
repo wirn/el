@@ -13,9 +13,10 @@
         -
         {{ pi.time_end | date : "HH" }}
       </span>
-      <span [ngClass]="getPriceClass(pi.SEK_per_kWh)"
-        >{{ pi.SEK_per_kWh | number : "1.1-1" }} kr</span
-      >
+      <span [ngClass]="getPriceClass(pi.SEK_per_kWh)">
+        {{ pi.SEK_per_kWh | number : "1.1-1" }}
+        kr
+      </span>
     </div>
   </div>
 
