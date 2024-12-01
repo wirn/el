@@ -3,3 +3,10 @@
 body {
   font-size: 1.07rem;
 }
+
+.wrapper {
+  &-link {
+    display: flex;
+    justify-content: center;
+  }
+}

@@ -3,10 +3,12 @@ import { PriceInterval } from '../../models/priceInterval.model';
 import { ElectricityPriceService } from '../../services/electricity-price.service';
 import { Region } from '../../models/regions.enum';
 import { CommonModule } from '@angular/common';
+import { CookieService } from 'ngx-cookie-service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-start',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './start.component.html',
   styleUrl: './start.component.scss',
 })
@@ -17,7 +19,10 @@ export class StartComponent {
   public today: Date | null = null;
   public tomorrow: Date | null = null;
 
-  constructor(private electricityPriceService: ElectricityPriceService) {}
+  constructor(
+    private electricityPriceService: ElectricityPriceService,
+    private cookieService: CookieService
+  ) {}
 
   ngOnInit(): void {
     this.today = new Date();
@@ -25,14 +30,18 @@ export class StartComponent {
     tomorrow.setDate(this.today.getDate() + 1);
     this.tomorrow = tomorrow;
 
+    const region: Region = this.cookieService.get('region')
+      ? (this.cookieService.get('region') as Region)
+      : Region.SE3;
+
     this.electricityPriceService
-      .getElectricityPrices(this.today, Region.SE3)
+      .getElectricityPrices(this.today, region)
       .subscribe((ep: PriceInterval[]) => {
         this.priceIntervalTodayList = ep;
       });
 
     this.electricityPriceService
-      .getElectricityPrices(this.tomorrow, Region.SE3)
+      .getElectricityPrices(this.tomorrow, region)
       .subscribe((ep: PriceInterval[]) => {
         this.priceIntervalTomorrowList = ep;
       });

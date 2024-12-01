@@ -1,4 +1,5 @@
 <div class="wrapper">
+  @if(priceIntervalTodayList){
   <div>
     <h3>{{ today | date : "dd/MM" }}</h3>
     <div
@@ -17,7 +18,7 @@
       </span>
     </div>
   </div>
-
+  } @if(priceIntervalTomorrowList){
   <div>
     <h3>{{ tomorrow | date : "dd/MM" }}</h3>
     <div *ngFor="let pi of priceIntervalTomorrowList" class="interval">
@@ -31,4 +32,9 @@
       </span>
     </div>
   </div>
+  }
+</div>
+
+<div class="wrapper-link">
+  <a routerLink="/settings">Byt region</a>
 </div>
