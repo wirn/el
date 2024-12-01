@@ -5,6 +5,7 @@ import { Region } from '../../models/regions.enum';
 import { CommonModule } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
 import { RouterModule } from '@angular/router';
+import { priceMeta } from '../../models/price-meta.model';
 
 @Component({
   selector: 'app-start',
@@ -16,6 +17,8 @@ export class StartComponent {
   //Capacitor
   public priceIntervalTodayList: PriceInterval[] = [];
   public priceIntervalTomorrowList: PriceInterval[] = [];
+  public priceMetaToday: priceMeta | null = null;
+  public priceMetaTomorrow: priceMeta | null = null;
   public today: Date | null = null;
   public tomorrow: Date | null = null;
 
@@ -38,12 +41,14 @@ export class StartComponent {
       .getElectricityPrices(this.today, region)
       .subscribe((ep: PriceInterval[]) => {
         this.priceIntervalTodayList = ep;
+        this.priceMetaToday = this.calculatePriceMeta(ep);
       });
 
     this.electricityPriceService
       .getElectricityPrices(this.tomorrow, region)
       .subscribe((ep: PriceInterval[]) => {
         this.priceIntervalTomorrowList = ep;
+        this.priceMetaTomorrow = this.calculatePriceMeta(ep);
       });
   }
 
@@ -57,6 +62,21 @@ export class StartComponent {
     } else {
       return '';
     }
+  }
+
+  private calculatePriceMeta(priceIntervals: PriceInterval[]): priceMeta {
+    if (!priceIntervals || priceIntervals.length === 0) {
+      return { min: 0, max: 0, average: 0 };
+    }
+
+    const prices = priceIntervals.map((interval) => interval.SEK_per_kWh);
+
+    const min = Math.min(...prices);
+    const max = Math.max(...prices);
+    const average =
+      prices.reduce((sum, price) => sum + price, 0) / prices.length;
+
+    return { min, max, average };
   }
 
   getTimeClass(startTime: Date): string {

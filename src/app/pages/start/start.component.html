@@ -2,6 +2,15 @@
   @if(priceIntervalTodayList){
   <div>
     <h3>{{ today | date : "dd/MM" }}</h3>
+
+    @if(priceMetaToday){
+    <div class="card">
+      <div>Min: {{ priceMetaToday.min | number : "1.2-2" }} kr</div>
+      <div>Max: {{ priceMetaToday.max | number : "1.2-2" }} kr</div>
+      <div>Snitt: {{ priceMetaToday.average | number : "1.2-2" }} kr</div>
+    </div>
+    }
+
     <div
       *ngFor="let pi of priceIntervalTodayList"
       class="interval"
@@ -21,6 +30,15 @@
   } @if(priceIntervalTomorrowList){
   <div>
     <h3>{{ tomorrow | date : "dd/MM" }}</h3>
+
+    @if(priceMetaTomorrow){
+    <div class="card">
+      <div>Min: {{ priceMetaTomorrow.min | number : "1.2-2" }} kr</div>
+      <div>Max: {{ priceMetaTomorrow.max | number : "1.2-2" }} kr</div>
+      <div>Snitt: {{ priceMetaTomorrow.average | number : "1.2-2" }} kr</div>
+    </div>
+    }
+
     <div *ngFor="let pi of priceIntervalTomorrowList" class="interval">
       <span style="margin-right: 0.75rem">
         {{ pi.time_start | date : "HH" }}
