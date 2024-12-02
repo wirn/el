@@ -11,14 +11,20 @@
 }
 
 .price {
+  &-free {
+    color: blue;
+  }
   &-low {
     color: green;
   }
-  &-high {
+  &-mid {
     color: orange;
   }
-  &-extreem {
+  &-high {
     color: red;
+  }
+  &-extreme {
+    color: darkred;
   }
 }
 

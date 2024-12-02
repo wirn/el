@@ -53,12 +53,16 @@ export class StartComponent {
   }
 
   getPriceClass(price: number): string {
-    if (price >= 0 && price < 1) {
+    if (price <= 0) {
+      return 'price-free';
+    } else if (price > 0 && price < 1) {
       return 'price-low';
     } else if (price >= 1 && price < 2) {
-      return 'price-high';
+      return 'price-mid';
     } else if (price >= 2 && price <= 3) {
-      return 'Three is a crowd.';
+      return 'price-high';
+    } else if (price > 3) {
+      return 'price-extreme';
     } else {
       return '';
     }
