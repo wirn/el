@@ -7,7 +7,12 @@
     <div class="card">
       <div>Min: {{ priceMetaToday.min | number : "1.2-2" }} kr</div>
       <div>Max: {{ priceMetaToday.max | number : "1.2-2" }} kr</div>
-      <div>Snitt: {{ priceMetaToday.average | number : "1.2-2" }} kr</div>
+      <div>
+        Snitt:
+        <span [ngClass]="getPriceClass(priceMetaToday.average)">
+          {{ priceMetaToday.average | number : "1.2-2" }} kr
+        </span>
+      </div>
     </div>
     }
 
@@ -35,7 +40,12 @@
     <div class="card">
       <div>Min: {{ priceMetaTomorrow.min | number : "1.2-2" }} kr</div>
       <div>Max: {{ priceMetaTomorrow.max | number : "1.2-2" }} kr</div>
-      <div>Snitt: {{ priceMetaTomorrow.average | number : "1.2-2" }} kr</div>
+      <div>
+        Snitt:
+        <span [ngClass]="getPriceClass(priceMetaTomorrow.average)">
+          {{ priceMetaTomorrow.average | number : "1.2-2" }} kr
+        </span>
+      </div>
     </div>
     }
 
