@@ -23,8 +23,12 @@
   &-high {
     color: red;
   }
-  &-extreme {
+  &-extreme,
+  &-optimus-prime {
     color: darkred;
+  }
+  &-optimus-prime {
+    animation: blinker 1s infinite;
   }
 }
 
@@ -42,4 +46,16 @@
   border: 1px solid rgb(165, 165, 165);
   border-radius: 0.5rem;
   margin-bottom: 1rem;
+}
+
+@keyframes blinker {
+  from {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
 }

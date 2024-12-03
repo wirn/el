@@ -63,6 +63,8 @@ export class StartComponent {
       return 'price-high';
     } else if (price > 3) {
       return 'price-extreme';
+    } else if (price > 4) {
+      return 'price-optimus-prime';
     } else {
       return '';
     }
