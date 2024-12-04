@@ -21,6 +21,7 @@ export class StartComponent {
   public priceMetaTomorrow: priceMeta | null = null;
   public today: Date = new Date();
   public tomorrow: Date = new Date();
+  public region: Region | null = null;
 
   constructor(
     private electricityPriceService: ElectricityPriceService,
@@ -29,20 +30,20 @@ export class StartComponent {
   ) {}
 
   ngOnInit(): void {
-    const region: Region | null = this.getRegion();
+    this.region = this.getRegion();
 
     this.setDates();
 
-    if (region) {
+    if (this.region) {
       this.electricityPriceService
-        .getElectricityPrices(this.today, region)
+        .getElectricityPrices(this.today, this.region)
         .subscribe((ep: PriceInterval[]) => {
           this.priceIntervalTodayList = ep;
           this.priceMetaToday = this.calculatePriceMeta(ep);
         });
 
       this.electricityPriceService
-        .getElectricityPrices(this.tomorrow, region)
+        .getElectricityPrices(this.tomorrow, this.region)
         .subscribe((ep: PriceInterval[]) => {
           this.priceIntervalTomorrowList = ep;
           this.priceMetaTomorrow = this.calculatePriceMeta(ep);
