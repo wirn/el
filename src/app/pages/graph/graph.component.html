@@ -16,9 +16,9 @@
     </div>
     }
 
-    <app-price-list
+    <app-interval-graph
       [priceIntervalList]="priceIntervalTodayList"
-    ></app-price-list>
+    ></app-interval-graph>
   </div>
   } @if(priceIntervalTomorrowList){
   <div>
@@ -37,16 +37,20 @@
     </div>
     }
 
-    <app-price-list
+    <app-interval-graph
       [priceIntervalList]="priceIntervalTomorrowList"
-    ></app-price-list>
+    ></app-interval-graph>
   </div>
   }
 </div>
-<!-- class="wrapper-link" -->
+<!--
+<div class="wrapper-link">
+  <a routerLink="/settings">Byt ut elområde {{ region }} </a>
+</div> -->
+
 <div>
   <div>
     <a routerLink="/settings">Byt ut elområde {{ region }} </a>
   </div>
-  <div><a routerLink="/graph">Byt till graf </a></div>
+  <div><a routerLink="/">Byt till lista </a></div>
 </div>

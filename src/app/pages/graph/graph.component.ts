@@ -1,27 +1,20 @@
-import { Component } from '@angular/core';
-import { PriceInterval } from '../../models/priceInterval.model';
-import { ElectricityPriceService } from '../../services/electricity-price.service';
-import { Region } from '../../models/regions.enum';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { IntervalGraphComponent } from './graph/graph.component';
+import { PriceInterval } from '../../models/priceInterval.model';
+import { priceMeta } from '../../models/price-meta.model';
+import { Region } from '../../models/regions.enum';
+import { ElectricityPriceService } from '../../services/electricity-price.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router, RouterModule } from '@angular/router';
-import { priceMeta } from '../../models/price-meta.model';
-import { PriceListComponent } from './price-list/price-list.component';
-import { IntervalGraphComponent } from '../graph/graph/graph.component';
 
 @Component({
-  selector: 'app-start',
-  imports: [
-    CommonModule,
-    RouterModule,
-    PriceListComponent,
-    IntervalGraphComponent,
-  ],
-  templateUrl: './start.component.html',
-  styleUrl: './start.component.scss',
+  selector: 'app-graph',
+  imports: [RouterModule, CommonModule, IntervalGraphComponent],
+  templateUrl: './graph.component.html',
+  styleUrl: './graph.component.scss',
 })
-export class StartComponent {
-  //Capacitor
+export class GraphComponent {
   public priceIntervalTodayList: PriceInterval[] = [];
   public priceIntervalTomorrowList: PriceInterval[] = [];
   public priceMetaToday: priceMeta | null = null;
@@ -73,6 +66,21 @@ export class StartComponent {
       : null;
   }
 
+  private calculatePriceMeta(priceIntervals: PriceInterval[]): priceMeta {
+    if (!priceIntervals || priceIntervals.length === 0) {
+      return { min: 0, max: 0, average: 0 };
+    }
+
+    const prices = priceIntervals.map((interval) => interval.SEK_per_kWh);
+
+    const min = Math.min(...prices);
+    const max = Math.max(...prices);
+    const average =
+      prices.reduce((sum, price) => sum + price, 0) / prices.length;
+
+    return { min, max, average };
+  }
+
   getPriceClass(price: number): string {
     if (price <= 0) {
       return 'price-free';
@@ -87,20 +95,5 @@ export class StartComponent {
     } else {
       return '';
     }
-  }
-
-  private calculatePriceMeta(priceIntervals: PriceInterval[]): priceMeta {
-    if (!priceIntervals || priceIntervals.length === 0) {
-      return { min: 0, max: 0, average: 0 };
-    }
-
-    const prices = priceIntervals.map((interval) => interval.SEK_per_kWh);
-
-    const min = Math.min(...prices);
-    const max = Math.max(...prices);
-    const average =
-      prices.reduce((sum, price) => sum + price, 0) / prices.length;
-
-    return { min, max, average };
   }
 }
