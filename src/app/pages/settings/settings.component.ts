@@ -9,10 +9,18 @@ import {
 import { CommonModule } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
 import { Router, RouterModule } from '@angular/router';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-settings',
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule,
+    MatSelectModule,
+    MatFormFieldModule,
+  ],
   providers: [CookieService],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss',
@@ -21,12 +29,15 @@ export class SettingsComponent implements OnInit {
   form: any = [];
   region: Region | null = null;
 
-  options = [
-    { value: Region.SE1, label: '1' },
-    { value: Region.SE2, label: '2' },
-    { value: Region.SE3, label: '3' },
-    { value: Region.SE4, label: '4' },
-  ];
+  options: string[] = [Region.SE1, Region.SE2, Region.SE3, Region.SE4];
+  //selectedOption: string | undefined;
+
+  // options = [
+  //   { value: Region.SE1, label: '1' },
+  //   { value: Region.SE2, label: '2' },
+  //   { value: Region.SE3, label: '3' },
+  //   { value: Region.SE4, label: '4' },
+  // ];
 
   constructor(
     private fb: FormBuilder,
@@ -36,9 +47,9 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.region = this.getRegion();
-    const formValue = this.region ? this.region : Region.SE3;
+
     this.form = this.fb.group({
-      dropdown: new FormControl<Region>(formValue, { nonNullable: true }),
+      dropdown: new FormControl<Region | null>(this.region ?? null),
     });
 
     this.form.controls.dropdown.valueChanges.subscribe((reg: Region) => {
