@@ -16,21 +16,9 @@
     </div>
     }
 
-    <div
-      *ngFor="let pi of priceIntervalTodayList"
-      class="interval"
-      [ngClass]="getTimeClass(pi.time_start)"
-    >
-      <span style="margin-right: 0.75rem">
-        {{ pi.time_start | date : "HH" }}
-        -
-        {{ pi.time_end | date : "HH" }}
-      </span>
-      <span [ngClass]="getPriceClass(pi.SEK_per_kWh)">
-        {{ pi.SEK_per_kWh | number : "1.2-2" }}
-        kr
-      </span>
-    </div>
+    <app-price-list
+      [priceIntervalList]="priceIntervalTodayList"
+    ></app-price-list>
   </div>
   } @if(priceIntervalTomorrowList){
   <div>
@@ -49,16 +37,9 @@
     </div>
     }
 
-    <div *ngFor="let pi of priceIntervalTomorrowList" class="interval">
-      <span style="margin-right: 0.75rem">
-        {{ pi.time_start | date : "HH" }}
-        -
-        {{ pi.time_end | date : "HH" }}
-      </span>
-      <span [ngClass]="getPriceClass(pi.SEK_per_kWh)">
-        {{ pi.SEK_per_kWh | number : "1.2-2" }} kr
-      </span>
-    </div>
+    <app-price-list
+      [priceIntervalList]="priceIntervalTomorrowList"
+    ></app-price-list>
   </div>
   }
 </div>

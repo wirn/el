@@ -6,10 +6,11 @@ import { CommonModule } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
 import { Router, RouterModule } from '@angular/router';
 import { priceMeta } from '../../models/price-meta.model';
+import { PriceListComponent } from './price-list/price-list.component';
 
 @Component({
   selector: 'app-start',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, PriceListComponent],
   templateUrl: './start.component.html',
   styleUrl: './start.component.scss',
 })
@@ -95,11 +96,5 @@ export class StartComponent {
       prices.reduce((sum, price) => sum + price, 0) / prices.length;
 
     return { min, max, average };
-  }
-
-  getTimeClass(startTime: Date): string {
-    return new Date(startTime).getHours() === new Date().getHours()
-      ? 'interval-now'
-      : '';
   }
 }

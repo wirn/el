@@ -10,6 +10,21 @@
   }
 }
 
+.interval {
+  padding: 0.175rem;
+  &-now {
+    border: 1px solid rgb(165, 165, 165);
+    border-radius: 0.5rem;
+  }
+}
+
+.card {
+  padding: 0.5rem;
+  border: 1px solid rgb(165, 165, 165);
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
 .price {
   &-free {
     color: blue;
@@ -27,21 +42,6 @@
   &-optimus-prime {
     animation: blinker 1s infinite;
   }
-}
-
-.interval {
-  padding: 0.175rem;
-  &-now {
-    border: 1px solid rgb(165, 165, 165);
-    border-radius: 0.5rem;
-  }
-}
-
-.card {
-  padding: 0.5rem;
-  border: 1px solid rgb(165, 165, 165);
-  border-radius: 0.5rem;
-  margin-bottom: 1rem;
 }
 
 @keyframes blinker {

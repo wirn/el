@@ -1,0 +1,18 @@
+.price {
+  &-free {
+    color: blue;
+  }
+  &-low {
+    color: green;
+  }
+  &-mid {
+    color: orange;
+  }
+  &-high,
+  &-optimus-prime {
+    color: red;
+  }
+  &-optimus-prime {
+    animation: blinker 1s infinite;
+  }
+}

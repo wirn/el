@@ -30,14 +30,6 @@ export class SettingsComponent implements OnInit {
   region: Region | null = null;
 
   options: string[] = [Region.SE1, Region.SE2, Region.SE3, Region.SE4];
-  //selectedOption: string | undefined;
-
-  // options = [
-  //   { value: Region.SE1, label: '1' },
-  //   { value: Region.SE2, label: '2' },
-  //   { value: Region.SE3, label: '3' },
-  //   { value: Region.SE4, label: '4' },
-  // ];
 
   constructor(
     private fb: FormBuilder,
