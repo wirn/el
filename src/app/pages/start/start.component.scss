@@ -20,12 +20,9 @@
   &-mid {
     color: orange;
   }
-  &-high {
-    color: red;
-  }
-  &-extreme,
+  &-high,
   &-optimus-prime {
-    color: darkred;
+    color: red;
   }
   &-optimus-prime {
     animation: blinker 1s infinite;

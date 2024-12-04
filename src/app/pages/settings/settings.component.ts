@@ -19,6 +19,7 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class SettingsComponent implements OnInit {
   form: any = [];
+  region: Region | null = null;
 
   options = [
     { value: Region.SE1, label: '1' },
@@ -34,10 +35,8 @@ export class SettingsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const reg = this.cookieService.get('region');
-    const formValue: Region = (Object.values(Region) as string[]).includes(reg)
-      ? (reg as Region)
-      : Region.SE3;
+    this.region = this.getRegion();
+    const formValue = this.region ? this.region : Region.SE3;
     this.form = this.fb.group({
       dropdown: new FormControl<Region>(formValue, { nonNullable: true }),
     });
@@ -46,5 +45,11 @@ export class SettingsComponent implements OnInit {
       this.cookieService.set('region', reg, { expires: 365, path: '/' });
       this.router.navigate(['/']);
     });
+  }
+
+  private getRegion(): Region | null {
+    return this.cookieService.get('region')
+      ? (this.cookieService.get('region') as Region)
+      : null;
   }
 }

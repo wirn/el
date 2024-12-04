@@ -4,7 +4,7 @@ import { ElectricityPriceService } from '../../services/electricity-price.servic
 import { Region } from '../../models/regions.enum';
 import { CommonModule } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { priceMeta } from '../../models/price-meta.model';
 
 @Component({
@@ -19,37 +19,50 @@ export class StartComponent {
   public priceIntervalTomorrowList: PriceInterval[] = [];
   public priceMetaToday: priceMeta | null = null;
   public priceMetaTomorrow: priceMeta | null = null;
-  public today: Date | null = null;
-  public tomorrow: Date | null = null;
+  public today: Date = new Date();
+  public tomorrow: Date = new Date();
 
   constructor(
     private electricityPriceService: ElectricityPriceService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    const region: Region | null = this.getRegion();
+
+    this.setDates();
+
+    if (region) {
+      this.electricityPriceService
+        .getElectricityPrices(this.today, region)
+        .subscribe((ep: PriceInterval[]) => {
+          this.priceIntervalTodayList = ep;
+          this.priceMetaToday = this.calculatePriceMeta(ep);
+        });
+
+      this.electricityPriceService
+        .getElectricityPrices(this.tomorrow, region)
+        .subscribe((ep: PriceInterval[]) => {
+          this.priceIntervalTomorrowList = ep;
+          this.priceMetaTomorrow = this.calculatePriceMeta(ep);
+        });
+    } else {
+      this.router.navigate(['/settings']);
+    }
+  }
+
+  private setDates() {
     this.today = new Date();
     const tomorrow = new Date(this.today);
     tomorrow.setDate(this.today.getDate() + 1);
     this.tomorrow = tomorrow;
+  }
 
-    const region: Region = this.cookieService.get('region')
+  private getRegion(): Region | null {
+    return this.cookieService.get('region')
       ? (this.cookieService.get('region') as Region)
-      : Region.SE3;
-
-    this.electricityPriceService
-      .getElectricityPrices(this.today, region)
-      .subscribe((ep: PriceInterval[]) => {
-        this.priceIntervalTodayList = ep;
-        this.priceMetaToday = this.calculatePriceMeta(ep);
-      });
-
-    this.electricityPriceService
-      .getElectricityPrices(this.tomorrow, region)
-      .subscribe((ep: PriceInterval[]) => {
-        this.priceIntervalTomorrowList = ep;
-        this.priceMetaTomorrow = this.calculatePriceMeta(ep);
-      });
+      : null;
   }
 
   getPriceClass(price: number): string {
@@ -62,8 +75,6 @@ export class StartComponent {
     } else if (price >= 2 && price <= 3) {
       return 'price-high';
     } else if (price > 3) {
-      return 'price-extreme';
-    } else if (price > 4) {
       return 'price-optimus-prime';
     } else {
       return '';
