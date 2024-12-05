@@ -11,12 +11,7 @@ import { IntervalGraphComponent } from '../graph/graph/graph.component';
 
 @Component({
   selector: 'app-start',
-  imports: [
-    CommonModule,
-    RouterModule,
-    PriceListComponent,
-    IntervalGraphComponent,
-  ],
+  imports: [CommonModule, RouterModule, PriceListComponent],
   templateUrl: './start.component.html',
   styleUrl: './start.component.scss',
 })
