@@ -15,6 +15,9 @@ import { Router, RouterModule } from '@angular/router';
   styleUrl: './graph.component.scss',
 })
 export class GraphComponent {
+
+  //"@swimlane/ngx-charts": "^21.0.0",
+
   public priceIntervalTodayList: PriceInterval[] = [];
   public priceIntervalTomorrowList: PriceInterval[] = [];
   public priceMetaToday: priceMeta | null = null;
