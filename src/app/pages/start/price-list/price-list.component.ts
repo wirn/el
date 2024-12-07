@@ -28,7 +28,10 @@ export class PriceListComponent {
   }
 
   getTimeClass(startTime: Date): string {
-    return new Date(startTime).getHours() === new Date().getHours()
+    const time = new Date(startTime);
+    const now = new Date();
+
+    return time.getHours() === now.getHours() && time.getDay() == now.getDay()
       ? 'interval-now'
       : '';
   }
