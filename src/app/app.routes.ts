@@ -12,8 +12,8 @@ export const routes: Routes = [
     path: 'settings',
     component: SettingsComponent,
   },
-  {
-    path: 'graph',
-    component: GraphComponent,
-  },
+  // {
+  //   path: 'graph',
+  //   component: GraphComponent,
+  // },
 ];

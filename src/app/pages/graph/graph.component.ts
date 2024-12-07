@@ -10,7 +10,7 @@ import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-graph',
-  imports: [RouterModule, CommonModule, IntervalGraphComponent],
+  imports: [RouterModule, CommonModule], //IntervalGraphComponent
   templateUrl: './graph.component.html',
   styleUrl: './graph.component.scss',
 })
