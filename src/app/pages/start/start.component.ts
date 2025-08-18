@@ -7,7 +7,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { Router, RouterModule } from '@angular/router';
 import { priceMeta } from '../../models/price-meta.model';
 import { PriceListComponent } from './price-list/price-list.component';
-import { IntervalGraphComponent } from '../graph/graph/graph.component';
 
 @Component({
   selector: 'app-start',
@@ -16,7 +15,6 @@ import { IntervalGraphComponent } from '../graph/graph/graph.component';
   styleUrl: './start.component.scss',
 })
 export class StartComponent {
-  //Capacitor
   public priceIntervalTodayList: PriceInterval[] = [];
   public priceIntervalTomorrowList: PriceInterval[] = [];
   public priceMetaToday: priceMeta | null = null;

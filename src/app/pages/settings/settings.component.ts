@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Region } from '../../models/regions.enum';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { CookieService } from 'ngx-cookie-service';
 import { Router, RouterModule } from '@angular/router';
@@ -18,8 +13,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     ReactiveFormsModule,
     RouterModule,
     MatSelectModule,
-    MatFormFieldModule
-],
+    MatFormFieldModule,
+  ],
   providers: [CookieService],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss',
