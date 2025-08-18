@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { PriceInterval } from '../../../models/priceInterval.model';
 //import { Color, NgxChartsModule } from '@swimlane/ngx-charts';
@@ -17,7 +17,7 @@ interface graphData {
 
 @Component({
   selector: 'app-interval-graph',
-  imports: [CommonModule], //NgxChartsModule
+  imports: [], //NgxChartsModule
   templateUrl: './graph.component.html',
   styleUrl: './graph.component.scss',
 })

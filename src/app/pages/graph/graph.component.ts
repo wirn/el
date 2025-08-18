@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { IntervalGraphComponent } from './graph/graph.component';
 import { PriceInterval } from '../../models/priceInterval.model';
@@ -10,7 +10,7 @@ import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-graph',
-  imports: [RouterModule, CommonModule], //IntervalGraphComponent
+  imports: [RouterModule], //IntervalGraphComponent
   templateUrl: './graph.component.html',
   styleUrl: './graph.component.scss',
 })

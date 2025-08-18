@@ -6,7 +6,7 @@ import {
   FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 import { CookieService } from 'ngx-cookie-service';
 import { Router, RouterModule } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
@@ -15,12 +15,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 @Component({
   selector: 'app-settings',
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     RouterModule,
     MatSelectModule,
-    MatFormFieldModule,
-  ],
+    MatFormFieldModule
+],
   providers: [CookieService],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss',
