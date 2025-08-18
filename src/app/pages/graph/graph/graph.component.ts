@@ -17,7 +17,7 @@ interface graphData {
 
 @Component({
   selector: 'app-interval-graph',
-  imports: [CommonModule, NgxChartsModule], //NgxChartsModule
+  imports: [CommonModule], //NgxChartsModule
   templateUrl: './graph.component.html',
   styleUrl: './graph.component.scss',
 })
