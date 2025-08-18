@@ -10,6 +10,11 @@ export const routes: Routes = [
         (m) => m.SettingsComponent
       ),
   },
+  {
+    path: 'graph',
+    loadComponent: () =>
+      import('./pages/graph/graph.component').then((m) => m.GraphComponent),
+  },
 ];
 // {
 //   path: 'graph',

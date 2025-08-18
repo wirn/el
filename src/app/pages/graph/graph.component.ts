@@ -1,23 +1,20 @@
-
 import { Component } from '@angular/core';
-import { IntervalGraphComponent } from './graph/graph.component';
 import { PriceInterval } from '../../models/priceInterval.model';
 import { priceMeta } from '../../models/price-meta.model';
 import { Region } from '../../models/regions.enum';
 import { ElectricityPriceService } from '../../services/electricity-price.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router, RouterModule } from '@angular/router';
+import { IntervalGraphComponent } from './graph/graph.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-graph',
-  imports: [RouterModule], //IntervalGraphComponent
+  imports: [RouterModule, IntervalGraphComponent, CommonModule],
   templateUrl: './graph.component.html',
   styleUrl: './graph.component.scss',
 })
 export class GraphComponent {
-
-  //"@swimlane/ngx-charts": "^21.0.0",
-
   public priceIntervalTodayList: PriceInterval[] = [];
   public priceIntervalTomorrowList: PriceInterval[] = [];
   public priceMetaToday: priceMeta | null = null;
