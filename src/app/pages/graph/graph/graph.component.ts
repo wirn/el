@@ -1,7 +1,7 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { PriceInterval } from '../../../models/priceInterval.model';
 import { CommonModule } from '@angular/common';
-import { Color, NgxChartsModule } from '@swimlane/ngx-charts';
+//import { Color, NgxChartsModule } from '@swimlane/ngx-charts';
 
 declare enum ScaleType {
   Time = 'time',
