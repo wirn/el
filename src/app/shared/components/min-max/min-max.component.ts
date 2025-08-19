@@ -31,4 +31,16 @@ export class MinMaxComponent {
       return '';
     }
   }
+
+  getDateName(): string {
+    const dateStr = this.dateStr?.toLocaleDateString('sv-SE', {
+      weekday: 'long',
+    });
+
+    if (!dateStr) {
+      return '';
+    }
+
+    return dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
+  }
 }

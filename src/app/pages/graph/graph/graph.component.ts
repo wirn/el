@@ -25,7 +25,7 @@ export class IntervalGraphComponent {
   @Input() priceIntervalList: PriceInterval[] = [];
   mapedGraphData: graphData[] | null = null;
 
-  view: [number, number] = [364, 700];
+  view: [number, number] = [364, 620];
 
   showLabels = true;
   isDoughnut = false;
