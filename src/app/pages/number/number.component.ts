@@ -9,12 +9,12 @@ import { priceMeta } from '../../models/price-meta.model';
 import { PriceListComponent } from './price-list/price-list.component';
 
 @Component({
-  selector: 'app-start',
+  selector: 'app-number',
   imports: [CommonModule, RouterModule, PriceListComponent],
-  templateUrl: './start.component.html',
-  styleUrl: './start.component.scss',
+  templateUrl: './number.component.html',
+  styleUrl: './number.component.scss',
 })
-export class StartComponent {
+export class NumberComponent {
   public priceIntervalTodayList: PriceInterval[] = [];
   public priceIntervalTomorrowList: PriceInterval[] = [];
   public priceMetaToday: priceMeta | null = null;

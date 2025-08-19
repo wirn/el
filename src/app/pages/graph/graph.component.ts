@@ -7,10 +7,16 @@ import { CookieService } from 'ngx-cookie-service';
 import { Router, RouterModule } from '@angular/router';
 import { IntervalGraphComponent } from './graph/graph.component';
 import { CommonModule } from '@angular/common';
+import { MinMaxComponent } from '../../shared/components/min-max/min-max.component';
 
 @Component({
   selector: 'app-graph',
-  imports: [RouterModule, IntervalGraphComponent, CommonModule],
+  imports: [
+    RouterModule,
+    IntervalGraphComponent,
+    MinMaxComponent,
+    CommonModule,
+  ],
   templateUrl: './graph.component.html',
   styleUrl: './graph.component.scss',
 })
@@ -37,9 +43,9 @@ export class GraphComponent {
     if (this.region) {
       this.electricityPriceService
         .getElectricityPrices(this.today, this.region)
-        .subscribe((ep: PriceInterval[]) => {
-          this.priceIntervalTodayList = ep;
-          this.priceMetaToday = this.calculatePriceMeta(ep);
+        .subscribe((pi: PriceInterval[]) => {
+          this.priceIntervalTodayList = pi;
+          this.priceMetaToday = this.calculatePriceMeta(pi);
         });
 
       this.electricityPriceService

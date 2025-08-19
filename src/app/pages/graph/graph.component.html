@@ -1,55 +1,33 @@
+@if(priceIntervalTodayList){
 <div class="wrapper">
-  <div>test9</div>
-  @if(priceIntervalTodayList){
-  <div>
-    <h3>{{ today | date : "dd/MM" }}</h3>
+  <!-- <h3>{{ today | date : "dd/MM" }}</h3> -->
 
-    @if(priceMetaToday){
-    <div class="card">
-      <div>Min: {{ priceMetaToday.min | number : "1.2-2" }} kr</div>
-      <div>Max: {{ priceMetaToday.max | number : "1.2-2" }} kr</div>
-      <div>
-        Snitt:
-        <span [ngClass]="getPriceClass(priceMetaToday.average)">
-          {{ priceMetaToday.average | number : "1.2-2" }} kr
-        </span>
-      </div>
-    </div>
-    }
-
-    <!-- <pre>{{ priceIntervalTodayList | json }}</pre> -->
-
-    <app-interval-graph
-      [priceIntervalList]="priceIntervalTodayList"
-    ></app-interval-graph>
-  </div>
-  } @if(priceIntervalTomorrowList){
-  <div>
-    <h3>{{ tomorrow | date : "dd/MM" }}</h3>
-
-    @if(priceMetaTomorrow){
-    <div class="card">
-      <div>Min: {{ priceMetaTomorrow.min | number : "1.2-2" }} kr</div>
-      <div>Max: {{ priceMetaTomorrow.max | number : "1.2-2" }} kr</div>
-      <div>
-        Snitt:
-        <span [ngClass]="getPriceClass(priceMetaTomorrow.average)">
-          {{ priceMetaTomorrow.average | number : "1.2-2" }} kr
-        </span>
-      </div>
-    </div>
-    }
-
-    <!-- <app-interval-graph
-      [priceIntervalList]="priceIntervalTomorrowList"
-    ></app-interval-graph> -->
-  </div>
+  @if(priceMetaToday){
+  <app-min-max [priceMeta]="priceMetaToday" [dateStr]="today"></app-min-max>
   }
-</div>
 
+  <app-interval-graph
+    [priceIntervalList]="priceIntervalTodayList"
+  ></app-interval-graph>
+</div>
+} @if(priceIntervalTomorrowList && priceIntervalTomorrowList.length > 0){
 <div>
-  <div>
-    <a routerLink="/settings">Byt ut elområde {{ region }} </a>
-  </div>
-  <div><a routerLink="/">Byt till lista </a></div>
+  <!-- <h3>{{ tomorrow | date : "dd/MM" }}</h3> -->
+
+  @if(priceMetaTomorrow){
+  <app-min-max
+    [priceMeta]="priceMetaTomorrow"
+    [dateStr]="tomorrow"
+  ></app-min-max>
+  }
+
+  <app-interval-graph
+    [priceIntervalList]="priceIntervalTomorrowList"
+  ></app-interval-graph>
+</div>
+}
+
+<div class="wrapper-link">
+  <a routerLink="/number">Byt till lista </a>
+  <a routerLink="/settings">Byt elområde {{ region }} </a>
 </div>

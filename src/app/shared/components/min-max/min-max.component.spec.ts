@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StartComponent } from './start.component';
+import { MinMaxComponent } from './min-max.component';
 
-describe('StartComponent', () => {
-  let component: StartComponent;
-  let fixture: ComponentFixture<StartComponent>;
+describe('MinMaxComponent', () => {
+  let component: MinMaxComponent;
+  let fixture: ComponentFixture<MinMaxComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StartComponent]
+      imports: [MinMaxComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(StartComponent);
+    fixture = TestBed.createComponent(MinMaxComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -25,7 +25,7 @@ export class IntervalGraphComponent {
   @Input() priceIntervalList: PriceInterval[] = [];
   mapedGraphData: graphData[] | null = null;
 
-  view: [number, number] = [400, 800];
+  view: [number, number] = [364, 700];
 
   showLabels = true;
   isDoughnut = false;
@@ -46,10 +46,11 @@ export class IntervalGraphComponent {
 
   mapPriceIntervalsToGraphData(priceIntervals: PriceInterval[]): graphData[] {
     return priceIntervals.map((interval) => ({
-      name:
-        new Date(interval.time_start).getHours().toString() +
-        ' - ' +
-        (new Date(interval.time_start).getHours() + 1).toString(),
+      // name:
+      //   new Date(interval.time_start).getHours().toString() +
+      //   ' - ' +
+      //   (new Date(interval.time_start).getHours() + 1).toString(),
+      name: new Date(interval.time_start).getHours().toString(),
       value: interval.SEK_per_kWh,
     }));
   }

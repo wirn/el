@@ -1,0 +1,19 @@
+.card {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 1fr;
+  gap: 0.5rem;
+  h3 {
+    text-align: center;
+    grid-column: 1 / 4;
+    margin-bottom: 0;
+  }
+  > div {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    svg {
+      margin-right: 0.25rem;
+    }
+  }
+}
