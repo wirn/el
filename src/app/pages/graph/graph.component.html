@@ -1,24 +1,22 @@
-@if(priceIntervalTodayList){
+@if(priceIntervalTodayList){ @if(priceMetaToday){
 <div class="wrapper">
-  <!-- <h3>{{ today | date : "dd/MM" }}</h3> -->
-
-  @if(priceMetaToday){
   <app-min-max [priceMeta]="priceMetaToday" [dateStr]="today"></app-min-max>
-  }
-
-  <app-interval-graph
-    [priceIntervalList]="priceIntervalTodayList"
-  ></app-interval-graph>
 </div>
+}
+
+<app-interval-graph
+  [priceIntervalList]="priceIntervalTodayList"
+></app-interval-graph>
+
 } @if(priceIntervalTomorrowList && priceIntervalTomorrowList.length > 0){
 <div>
-  <!-- <h3>{{ tomorrow | date : "dd/MM" }}</h3> -->
-
   @if(priceMetaTomorrow){
-  <app-min-max
-    [priceMeta]="priceMetaTomorrow"
-    [dateStr]="tomorrow"
-  ></app-min-max>
+  <div class="wrapper">
+    <app-min-max
+      [priceMeta]="priceMetaTomorrow"
+      [dateStr]="tomorrow"
+    ></app-min-max>
+  </div>
   }
 
   <app-interval-graph
