@@ -1,5 +1,50 @@
 <div class="wrapper">
-  <div>test7</div>
+  <div>test8</div>
+  @if(priceIntervalTodayList){
+  <div>
+    <h3>{{ today | date : "dd/MM" }}</h3>
+
+    @if(priceMetaToday){
+    <div class="card">
+      <div>Min: {{ priceMetaToday.min | number : "1.2-2" }} kr</div>
+      <div>Max: {{ priceMetaToday.max | number : "1.2-2" }} kr</div>
+      <div>
+        Snitt:
+        <span [ngClass]="getPriceClass(priceMetaToday.average)">
+          {{ priceMetaToday.average | number : "1.2-2" }} kr
+        </span>
+      </div>
+    </div>
+    }
+
+    <pre>{{ priceIntervalTodayList | json }}</pre>
+
+    <app-interval-graph
+      [priceIntervalList]="priceIntervalTodayList"
+    ></app-interval-graph>
+  </div>
+  } @if(priceIntervalTomorrowList){
+  <div>
+    <h3>{{ tomorrow | date : "dd/MM" }}</h3>
+
+    @if(priceMetaTomorrow){
+    <div class="card">
+      <div>Min: {{ priceMetaTomorrow.min | number : "1.2-2" }} kr</div>
+      <div>Max: {{ priceMetaTomorrow.max | number : "1.2-2" }} kr</div>
+      <div>
+        Snitt:
+        <span [ngClass]="getPriceClass(priceMetaTomorrow.average)">
+          {{ priceMetaTomorrow.average | number : "1.2-2" }} kr
+        </span>
+      </div>
+    </div>
+    }
+
+    <!-- <app-interval-graph
+      [priceIntervalList]="priceIntervalTomorrowList"
+    ></app-interval-graph> -->
+  </div>
+  }
 </div>
 
 <div>

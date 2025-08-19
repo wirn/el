@@ -5,12 +5,12 @@ import { Region } from '../../models/regions.enum';
 import { ElectricityPriceService } from '../../services/electricity-price.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router, RouterModule } from '@angular/router';
-//import { IntervalGraphComponent } from './graph/graph.component';
+import { IntervalGraphComponent } from './graph/graph.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-graph',
-  imports: [RouterModule, CommonModule], //IntervalGraphComponent
+  imports: [RouterModule, IntervalGraphComponent, CommonModule],
   templateUrl: './graph.component.html',
   styleUrl: './graph.component.scss',
 })
