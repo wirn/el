@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <div>test8</div>
+  <div>test9</div>
   @if(priceIntervalTodayList){
   <div>
     <h3>{{ today | date : "dd/MM" }}</h3>
@@ -17,7 +17,7 @@
     </div>
     }
 
-    <pre>{{ priceIntervalTodayList | json }}</pre>
+    <!-- <pre>{{ priceIntervalTodayList | json }}</pre> -->
 
     <app-interval-graph
       [priceIntervalList]="priceIntervalTodayList"

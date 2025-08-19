@@ -1,7 +1,7 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { PriceInterval } from '../../../models/priceInterval.model';
 import { CommonModule } from '@angular/common';
-//import { Color, NgxChartsModule } from '@swimlane/ngx-charts';
+import { Color, NgxChartsModule, ScaleType } from '@swimlane/ngx-charts';
 
 // declare enum ScaleType {
 //   Time = 'time',
@@ -17,7 +17,7 @@ interface graphData {
 
 @Component({
   selector: 'app-interval-graph',
-  imports: [CommonModule], //NgxChartsModule
+  imports: [CommonModule, NgxChartsModule], //NgxChartsModule
   templateUrl: './graph.component.html',
   styleUrl: './graph.component.scss',
 })
@@ -29,12 +29,12 @@ export class IntervalGraphComponent {
 
   showLabels = true;
   isDoughnut = false;
-  // colorScheme: Color = {
-  //   name: 'custom',
-  //   selectable: true,
-  //   group: ScaleType.Linear,
-  //   domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'], // Dina färger
-  // };
+  colorScheme: Color = {
+    name: 'custom',
+    selectable: true,
+    group: ScaleType.Linear,
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'],
+  };
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['priceIntervalList'] && this.priceIntervalList) {
