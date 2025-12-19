@@ -1,18 +1,13 @@
-<div
-  class="interval-graph"
-  [class]="'interval-graph highlight-' + currentHourLabel.replace(':', '-')"
+<ngx-charts-bar-horizontal
+  [view]="view"
+  [results]="mappedGraphData"
+  [gradient]="false"
+  [xAxis]="true"
+  [yAxis]="true"
+  [legend]="false"
+  [showXAxisLabel]="true"
+  [showYAxisLabel]="false"
+  [xAxisLabel]="'Kr'"
+  [yAxisLabel]="'Tid'"
 >
-  <ngx-charts-bar-horizontal
-    [view]="view"
-    [results]="mappedGraphData"
-    [gradient]="false"
-    [xAxis]="true"
-    [yAxis]="true"
-    [legend]="false"
-    [showXAxisLabel]="true"
-    [showYAxisLabel]="false"
-    [xAxisLabel]="'Kr'"
-    [yAxisLabel]="'Tid'"
-  >
-  </ngx-charts-bar-horizontal>
-</div>
+</ngx-charts-bar-horizontal>
