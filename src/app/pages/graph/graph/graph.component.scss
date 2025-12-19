@@ -1,0 +1,11 @@
+:host ::ng-deep .is-current-hour-tick {
+  font-weight: 700;
+}
+
+:host ::ng-deep g.tick.is-current-hour-tick text {
+  font-weight: 700;
+}
+
+:host ::ng-deep g.tick.is-current-hour-tick text {
+  text-decoration: underline;
+}

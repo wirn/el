@@ -1,13 +1,13 @@
-<ngx-charts-bar-horizontal
-  [view]="view"
-  [results]="mappedGraphData"
-  [gradient]="false"
-  [xAxis]="true"
-  [yAxis]="true"
-  [legend]="false"
-  [showXAxisLabel]="true"
-  [showYAxisLabel]="false"
-  [xAxisLabel]="'Kr'"
-  [yAxisLabel]="'Tid'"
->
-</ngx-charts-bar-horizontal>
+<div #chartHost class="chart-host">
+  <ngx-charts-bar-horizontal
+    [results]="mappedGraphData"
+    [view]="view"
+    [scheme]="colorScheme"
+    [xAxis]="true"
+    [yAxis]="true"
+    [xAxis]="true"
+    [yAxis]="true"
+    [showDataLabel]="showLabels"
+  >
+  </ngx-charts-bar-horizontal>
+</div>

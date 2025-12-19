@@ -5,6 +5,8 @@ import {
   SimpleChanges,
   OnDestroy,
   OnInit,
+  ElementRef,
+  viewChild,
 } from '@angular/core';
 import { Color, NgxChartsModule, ScaleType } from '@swimlane/ngx-charts';
 import { PriceInterval } from '../../../models/priceInterval.model';
@@ -24,7 +26,6 @@ export class IntervalGraphComponent implements OnInit, OnDestroy {
   @Input() priceIntervalList: PriceInterval[] = [];
 
   mappedGraphData: GraphData[] = [];
-
   view: [number, number] = [364, 680];
 
   showLabels = true;
@@ -37,13 +38,16 @@ export class IntervalGraphComponent implements OnInit, OnDestroy {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'],
   };
 
+  // Hook till wrapper-diven (Angulars nya viewChild-syntax)
+  chartHost = viewChild.required<ElementRef<HTMLElement>>('chartHost');
+
   currentHourLabel = this.getCurrentHourLabel();
   private hourTimerId: number | null = null;
 
   ngOnInit(): void {
-    // uppdatera markering när timmen slår om (och som fallback varje minut)
     this.hourTimerId = window.setInterval(() => {
       this.currentHourLabel = this.getCurrentHourLabel();
+      this.markCurrentHourRow(); // uppdatera markeringen när timmen ändras
     }, 60_000);
   }
 
@@ -56,7 +60,35 @@ export class IntervalGraphComponent implements OnInit, OnDestroy {
       this.mappedGraphData = this.mapPriceIntervalsToGraphData(
         this.priceIntervalList ?? []
       );
+      this.markCurrentHourRow(); // uppdatera markering efter ny data
     }
+  }
+
+  private markCurrentHourRow(): void {
+    // Vänta ett tick så att ngx-charts hinner rendera SVG:n
+    queueMicrotask(() => {
+      const host = this.chartHost().nativeElement;
+
+      // Tick-text i y-axeln (SVG). Selektorn kan variera lite mellan versioner,
+      // men detta brukar fungera för bar-horizontal.
+      const tickTexts = host.querySelectorAll<SVGTextElement>(
+        'g.y.axis g.tick text, g.y-axis g.tick text'
+      );
+
+      tickTexts.forEach((t) => {
+        t.classList.remove('is-current-hour-tick');
+        t.parentElement?.classList.remove('is-current-hour-tick');
+      });
+
+      for (const t of Array.from(tickTexts)) {
+        const label = (t.textContent ?? '').trim();
+        if (label === this.currentHourLabel) {
+          t.classList.add('is-current-hour-tick');
+          t.parentElement?.classList.add('is-current-hour-tick'); // tick-gruppen
+          break;
+        }
+      }
+    });
   }
 
   private getCurrentHourLabel(): string {
@@ -69,10 +101,7 @@ export class IntervalGraphComponent implements OnInit, OnDestroy {
     priceIntervals: PriceInterval[]
   ): GraphData[] {
     const points = [...priceIntervals]
-      .map((p) => ({
-        epoch: this.toEpoch(p.time_start),
-        value: p.SEK_per_kWh,
-      }))
+      .map((p) => ({ epoch: this.toEpoch(p.time_start), value: p.SEK_per_kWh }))
       .filter((p) => Number.isFinite(p.epoch) && Number.isFinite(p.value))
       .sort((a, b) => a.epoch - b.epoch);
 
@@ -92,12 +121,8 @@ export class IntervalGraphComponent implements OnInit, OnDestroy {
     return Array.from(byHour.entries())
       .sort(([a], [b]) => a - b)
       .map(([hourEpoch, agg]) => {
-        const labelDate = new Date(hourEpoch);
-        const hh = String(labelDate.getHours()).padStart(2, '0');
-        return {
-          name: `${hh}:00`,
-          value: agg.count > 0 ? agg.sum / agg.count : 0,
-        };
+        const hh = String(new Date(hourEpoch).getHours()).padStart(2, '0');
+        return { name: `${hh}:00`, value: agg.sum / agg.count };
       });
   }
 
