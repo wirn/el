@@ -31,7 +31,7 @@ export class IntervalGraphComponent implements OnInit, OnDestroy {
   @Input() priceIntervalList: PriceInterval[] = [];
 
   mappedGraphData: GraphData[] = [];
-  view: [number, number] = [364, 666];
+  view: [number, number] = [300, 666];
   customColors: CustomColor[] = [];
   showLabels = true;
   isDoughnut = false;
@@ -108,7 +108,7 @@ export class IntervalGraphComponent implements OnInit, OnDestroy {
 
     for (const p of points) {
       const d = new Date(p.epoch);
-      d.setMinutes(0, 0, 0);
+      d.setMinutes(0, 0, 0); // bucket per timme
       const hourKey = d.getTime();
 
       const agg = byHour.get(hourKey) ?? { sum: 0, count: 0 };
@@ -121,7 +121,10 @@ export class IntervalGraphComponent implements OnInit, OnDestroy {
       .sort(([a], [b]) => a - b)
       .map(([hourEpoch, agg]) => {
         const hh = String(new Date(hourEpoch).getHours()).padStart(2, '0');
-        return { name: `${hh}:00`, value: agg.sum / agg.count };
+        return {
+          name: hh,
+          value: agg.count > 0 ? agg.sum / agg.count : 0,
+        };
       });
   }
 
