@@ -6,7 +6,7 @@ import { ElectricityPriceService } from '../../services/electricity-price.servic
 import { CookieService } from 'ngx-cookie-service';
 import { Router, RouterModule } from '@angular/router';
 import { IntervalGraphComponent } from './graph/graph.component';
-import { CommonModule } from '@angular/common';
+
 import { MinMaxComponent } from '../../shared/components/min-max/min-max.component';
 
 @Component({
@@ -14,9 +14,8 @@ import { MinMaxComponent } from '../../shared/components/min-max/min-max.compone
   imports: [
     RouterModule,
     IntervalGraphComponent,
-    MinMaxComponent,
-    CommonModule,
-  ],
+    MinMaxComponent
+],
   templateUrl: './graph.component.html',
   styleUrl: './graph.component.scss',
 })

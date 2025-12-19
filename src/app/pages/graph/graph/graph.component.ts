@@ -1,6 +1,6 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { PriceInterval } from '../../../models/priceInterval.model';
-import { CommonModule } from '@angular/common';
+
 import { Color, NgxChartsModule, ScaleType } from '@swimlane/ngx-charts';
 
 // declare enum ScaleType {
@@ -17,7 +17,7 @@ interface graphData {
 
 @Component({
   selector: 'app-interval-graph',
-  imports: [CommonModule, NgxChartsModule], //NgxChartsModule
+  imports: [NgxChartsModule], //NgxChartsModule
   templateUrl: './graph.component.html',
   styleUrl: './graph.component.scss',
 })
