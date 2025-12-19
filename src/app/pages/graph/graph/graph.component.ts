@@ -11,6 +11,11 @@ import {
 import { Color, NgxChartsModule, ScaleType } from '@swimlane/ngx-charts';
 import { PriceInterval } from '../../../models/priceInterval.model';
 
+type CustomColor = {
+  name: string;
+  value: string;
+};
+
 interface GraphData {
   name: string;
   value: number;
@@ -26,17 +31,10 @@ export class IntervalGraphComponent implements OnInit, OnDestroy {
   @Input() priceIntervalList: PriceInterval[] = [];
 
   mappedGraphData: GraphData[] = [];
-  view: [number, number] = [364, 680];
-
+  view: [number, number] = [364, 666];
+  customColors: CustomColor[] = [];
   showLabels = true;
   isDoughnut = false;
-
-  colorScheme: Color = {
-    name: 'custom',
-    selectable: true,
-    group: ScaleType.Linear,
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'],
-  };
 
   // Hook till wrapper-diven (Angulars nya viewChild-syntax)
   chartHost = viewChild.required<ElementRef<HTMLElement>>('chartHost');
@@ -60,7 +58,8 @@ export class IntervalGraphComponent implements OnInit, OnDestroy {
       this.mappedGraphData = this.mapPriceIntervalsToGraphData(
         this.priceIntervalList ?? []
       );
-      this.markCurrentHourRow(); // uppdatera markering efter ny data
+      this.customColors = this.buildCustomColors(this.mappedGraphData);
+      this.markCurrentHourRow();
     }
   }
 
@@ -132,5 +131,21 @@ export class IntervalGraphComponent implements OnInit, OnDestroy {
         ? value.getTime()
         : new Date(value as any).getTime();
     return Number.isFinite(t) ? t : 0;
+  }
+
+  private buildCustomColors(data: GraphData[]): CustomColor[] {
+    return data.map((d) => ({
+      name: d.name,
+      value: this.getPriceColor(d.value),
+    }));
+  }
+
+  private getPriceColor(price: number): string {
+    if (price <= 0) return 'blue';
+    if (price > 0 && price < 1) return 'green';
+    if (price >= 1 && price < 2) return 'orange';
+    if (price >= 2 && price <= 3) return 'red';
+    if (price > 3) return 'dark-red';
+    return 'gray';
   }
 }
